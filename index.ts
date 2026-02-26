@@ -1,14 +1,35 @@
+import chalk from "chalk";
+import ora from "ora";
+
+type Fact = {
+    fact: string;
+    length: number;
+}
+
 export async function getFact(): Promise<string> {
+    const spinner = ora("Patience is a virtue...");
     const response = await fetch("https://catfact.ninja/fact");
 
     if (!response.ok) {
-        console.error("Unable to fetch", response.status, response.statusText);
+        spinner.fail(
+            'Unable to fetch - ${response.status}: ${response.statusText}',
+        );
         process.exit(1);
     }
 
-    console.log(await response.json());
+    const result = (await response.json()) as Fact;
 
-    return "";
+
+    spinner.succeed("Retrieved info about a feline!");
+    return result.fact;
 }
 
-await getFact();
+const catArt = `
+ /\\_/\\
+( o.o )
+ > ^ <
+`
+
+//You can add ASCII art by going to a website
+const fact = await getFact();
+console.log("\n\n", chalk.bgBlack(chalk.greenBright(fact)), "\n", catArt);
