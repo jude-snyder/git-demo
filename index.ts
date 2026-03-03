@@ -30,6 +30,23 @@ const catArt = `
  > ^ <
 `
 
-//You can add ASCII art by going to a website
+function addRandomEmoji(fact: string): string {
+    const emojis = ["🐱", "🙀", "😸", "😼", "😎", "😭", "🔥", "💀", "👍", "👀", "🆒"];
+
+    const selected: string[] = [];
+    
+    while (selected.length < 3) {
+        const randomEmoji =
+        emojis[Math.floor(Math.random() * emojis.length)]!;
+
+        if (!selected.includes(randomEmoji)) {
+            selected.push(randomEmoji);
+        }
+    }
+
+    return `${fact} ${selected.join(" ")}`;
+}
+
 const fact = await getFact();
-console.log("\n\n", chalk.bgBlack(chalk.greenBright(fact)), "\n", catArt);
+const enhancedFact = addRandomEmoji(fact);
+console.log("\n\n", chalk.bgBlack(chalk.greenBright(enhancedFact)), "\n", catArt);
