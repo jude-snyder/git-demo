@@ -49,4 +49,7 @@ function addRandomEmoji(fact: string): string {
 
 const fact = await getFact();
 const enhancedFact = addRandomEmoji(fact);
-console.log("\n\n", chalk.bgBlack(chalk.greenBright(enhancedFact)), "\n", catArt);
+console.log("\n\n", 
+    //chalk.bgBlack
+    (chalk.greenBright(enhancedFact)), 
+    "\n", catArt);
